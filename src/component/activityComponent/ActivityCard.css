@@ -1,23 +1,23 @@
-.activity-card-header{
-    margin-bottom: 0.7rem;
-    display: flex;
-    align-items: center;
+.activity-card-header {
+  margin-bottom: 0.7rem;
+  display: flex;
+  align-items: center;
 }
-.username-comp{
-    margin-left: 0.8rem;
+.username-comp {
+  margin-left: 0.8rem !important;
 }
-.activcontencard{
-    margin-top: 0.5rem !important;
-    width: 100%;
+.activcontencard {
+  margin-top: 0.5rem !important;
+  width: 100%;
 }
-.activeDescription{
-    padding: 0.7rem;
-    height: 100px;
-    background-color: var(--background-light-blue);
-    max-height: 300px;
-    overflow-y: scroll;
+.activeDescription {
+  padding: 0.7rem;
+  height: 100px;
+  background-color: var(--background-light-blue);
+  max-height: 300px;
+  overflow-y: scroll;
 }
 
-.activeDescription::-webkit-scrollbar{
-    display: none;
+.activeDescription::-webkit-scrollbar {
+  display: none;
 }
