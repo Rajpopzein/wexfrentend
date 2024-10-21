@@ -12,7 +12,6 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import { jwtDecode } from "jwt-decode";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -20,6 +19,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Button } from "@mui/material";
 import { toast } from "react-toastify";
+import Popper from "@mui/material/Popper";
+import { Box } from "@mui/material";
 
 const DashBoard = () => {
   const token = localStorage.getItem("token");
@@ -27,6 +28,7 @@ const DashBoard = () => {
   const [alluser, setAlluser] = useState([]);
   const [allPosts, setAllpost] = useState([]);
   const [allUsers, setAllusers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(""); // State for search input
 
   const names = ["public", "friends"];
 
@@ -47,7 +49,6 @@ const DashBoard = () => {
     const data = await axios.get(
       `https://wexbackend-1.onrender.com/api/users/${decodedToken?.data?.id}/friends`
     );
-    console.log(data, "ddddd");
     setAlluser(data?.data);
   };
 
@@ -57,6 +58,14 @@ const DashBoard = () => {
     userData();
   }, []);
 
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredUsers = allUsers.filter((user) =>
+    user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   // Formik setup
   const formik = useFormik({
     initialValues: {
@@ -65,8 +74,7 @@ const DashBoard = () => {
     },
     validationSchema: Yup.object({
       content: Yup.string().required("Please enter a post content"),
-      visibility: Yup.array().min(
-        1,
+      visibility: Yup.string().required(
         "Please select at least one visibility option"
       ),
     }),
@@ -87,6 +95,8 @@ const DashBoard = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [hoverdata, setHoveredData] = useState({});
   const [btndis, SetBtndis] = useState(false);
+  const [openpop, setOpenPop] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleaddfrnd = async () => {
     SetBtndis(true);
@@ -101,7 +111,6 @@ const DashBoard = () => {
       toast("Friend added successfully");
       SetBtndis(false);
       getalluser();
-      getalluser();
       userData();
     }
   };
@@ -113,10 +122,12 @@ const DashBoard = () => {
           <Typography style={{ marginBottom: "1rem" }}>Add Friends</Typography>
           <input
             id="outlined-required"
-            placeholder="search for friends"
+            placeholder="Search for friends"
             className="search-for-frind"
+            value={searchTerm}
+            onChange={handleSearchChange}
           />
-          {allUsers.length === 0 && (
+          {filteredUsers.length === 0 && (
             <p style={{ fontSize: "0.8rem", marginTop: "5px" }}>
               No friends found
             </p>
@@ -125,42 +136,43 @@ const DashBoard = () => {
             sx={{ width: "100%", bgcolor: "background.paper" }}
             className="all-user-list"
           >
-            {allUsers &&
-              allUsers.map((user, index) => (
-                <ListItem
-                  key={index}
-                  onMouseEnter={() => {
-                    setHoveredIndex(index);
-                    setHoveredData(user);
-                  }}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                  sx={{ position: "relative" }} // Ensures button can be positioned correctly
-                >
-                  <ListItemAvatar>
-                    <Avatar src="" alt={user.name} />
-                  </ListItemAvatar>
-                  <ListItemText primary={user.name} secondary={user.email} />
-
-                  {/* Show button on hover */}
-                  {hoveredIndex === index && (
+            {filteredUsers.map((user, index) => (
+              <ListItem
+                key={index}
+                onMouseEnter={(event) => {
+                  setHoveredIndex(index);
+                  setHoveredData(user);
+                  setOpenPop(true);
+                  setAnchorEl(event.currentTarget);
+                }}
+                onMouseLeave={() => {
+                  setHoveredIndex(null);
+                  setOpenPop(false);
+                  setAnchorEl(null);
+                }}
+                sx={{ position: "relative", cursor: "pointer" }}
+              >
+                <ListItemAvatar>
+                  <Avatar src="" alt={user.name} />
+                </ListItemAvatar>
+                <ListItemText primary={user.name} secondary={user.email} />
+                <Popper id={index} open={openpop} anchorEl={anchorEl}>
+                  <Box className="poper">
+                    <Typography>Add {user.name} as friend</Typography>
                     <Button
                       variant="contained"
                       color="primary"
-                      sx={{
-                        position: "absolute",
-                        right: 0,
-                        backgroundColor: "#000",
-                        width: "120px",
-                        height: "30px",
-                      }} // Adjust position as needed
+                      className="addfrndbtn"
+                      sx={{ width: "120px", height: "30px", marginLeft: "0.6rem" }}
                       disabled={btndis}
-                      onClick={handleaddfrnd} // Handle add friend action
+                      onClick={handleaddfrnd}
                     >
                       Add Friend
                     </Button>
-                  )}
-                </ListItem>
-              ))}
+                  </Box>
+                </Popper>
+              </ListItem>
+            ))}
           </List>
         </Card>
       </div>
@@ -196,7 +208,6 @@ const DashBoard = () => {
               }
             >
               <Select
-
                 className="select-selectp"
                 displayEmpty
                 value={formik.values.visibility}
@@ -207,6 +218,7 @@ const DashBoard = () => {
                   if (selected.length === 0) {
                     return <em>Visibility</em>;
                   }
+                  return selected;
                 }}
               >
                 <MenuItem disabled value="">
@@ -246,7 +258,6 @@ const DashBoard = () => {
             <p style={{ fontSize: "0.8rem" }}>No friends found</p>
           )}
           <List sx={{ width: "100%", bgcolor: "background.paper" }}>
-            {console.log(alluser, "friends")}
             {alluser &&
               alluser.map((user, index) => (
                 <ListItem key={index}>
