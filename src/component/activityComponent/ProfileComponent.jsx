@@ -13,7 +13,7 @@ const ProfileComponent = (data) => {
             alt={data?.data?.data?.name}
             ravan
           />
-          <div style={{ marginTop: "0.4rem" }}>
+          <div style={{ marginTop: "0.4rem", marginLeft: "0.4rem" }}>
             <Typography
               className="username-comp"
               variant="subtitle2"
