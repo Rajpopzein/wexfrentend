@@ -21,6 +21,7 @@ import { Button } from "@mui/material";
 import { toast } from "react-toastify";
 import Popper from "@mui/material/Popper";
 import { Box } from "@mui/material";
+import Popover from "@mui/material/Popover";
 
 const DashBoard = () => {
   const token = localStorage.getItem("token");
@@ -28,7 +29,10 @@ const DashBoard = () => {
   const [alluser, setAlluser] = useState([]);
   const [allPosts, setAllpost] = useState([]);
   const [allUsers, setAllusers] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(""); // State for search input
+  const [searchTerm, setSearchTerm] = useState("");
+  const [hoveredUser, setHoveredUser] = useState({});
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [popperOpen, setPopperOpen] = useState(false);
 
   const names = ["public", "friends"];
 
@@ -66,6 +70,21 @@ const DashBoard = () => {
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleAddFriend = async () => {
+    setButtonDisabled(true);
+    const value = {
+      friendId: hoveredUser._id,
+    };
+    const data = await axios.put(
+      `https://wexbackend-1.onrender.com/api/users/${decodedToken?.data?.id}/add-friend`,
+      value
+    );
+    if (data.status === 200) {
+      alert("Friend added successfully");
+      setButtonDisabled(false);
+      getalluser();
+    }
+  };
   // Formik setup
   const formik = useFormik({
     initialValues: {
@@ -98,22 +117,22 @@ const DashBoard = () => {
   const [openpop, setOpenPop] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleaddfrnd = async () => {
-    SetBtndis(true);
-    const value = {
-      friendId: hoverdata._id,
-    };
-    const data = await axios.put(
-      `https://wexbackend-1.onrender.com/api/users/${decodedToken?.data?.id}/add-friend`,
-      value
-    );
-    if (data.status === 200) {
-      toast("Friend added successfully");
-      SetBtndis(false);
-      getalluser();
-      userData();
-    }
-  };
+  // const handleaddfrnd = async () => {
+  //   SetBtndis(true);
+  //   const value = {
+  //     friendId: hoverdata._id,
+  //   };
+  //   const data = await axios.put(
+  //     `https://wexbackend-1.onrender.com/api/users/${decodedToken?.data?.id}/add-friend`,
+  //     value
+  //   );
+  //   if (data.status === 200) {
+  //     toast("Friend added successfully");
+  //     SetBtndis(false);
+  //     getalluser();
+  //     userData();
+  //   }
+  // };
 
   return (
     <div className="dashboard-main">
@@ -132,6 +151,11 @@ const DashBoard = () => {
               No friends found
             </p>
           )}
+          {filteredUsers.length === 0 && (
+            <p style={{ fontSize: "0.8rem", marginTop: "5px" }}>
+              No friends found
+            </p>
+          )}
           <List
             sx={{ width: "100%", bgcolor: "background.paper" }}
             className="all-user-list"
@@ -141,13 +165,13 @@ const DashBoard = () => {
                 key={index}
                 onMouseEnter={(event) => {
                   setHoveredIndex(index);
-                  setHoveredData(user);
-                  setOpenPop(true);
+                  setHoveredUser(user);
+                  setPopperOpen(true);
                   setAnchorEl(event.currentTarget);
                 }}
                 onMouseLeave={() => {
                   setHoveredIndex(null);
-                  setOpenPop(false);
+                  setPopperOpen(false);
                   setAnchorEl(null);
                 }}
                 sx={{ position: "relative", cursor: "pointer" }}
@@ -156,21 +180,26 @@ const DashBoard = () => {
                   <Avatar src="" alt={user.name} />
                 </ListItemAvatar>
                 <ListItemText primary={user.name} secondary={user.email} />
-                <Popper id={index} open={openpop} anchorEl={anchorEl}>
-                  <Box className="poper">
-                    <Typography>Add {user.name} as friend</Typography>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      className="addfrndbtn"
-                      sx={{ width: "120px", height: "30px", marginLeft: "0.6rem" }}
-                      disabled={btndis}
-                      onClick={handleaddfrnd}
-                    >
-                      Add Friend
-                    </Button>
-                  </Box>
-                </Popper>
+                {hoveredIndex === index && (
+                  <Popper
+                    open={popperOpen}
+                    anchorEl={anchorEl}
+                    placement="right"
+                  >
+                    <Box className="poper">
+                      <Typography>Add {user.name} as a friend</Typography>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleAddFriend}
+                        disabled={buttonDisabled}
+                        sx={{ marginTop: "0.5rem" }}
+                      >
+                        Add Friend
+                      </Button>
+                    </Box>
+                  </Popper>
+                )}
               </ListItem>
             ))}
           </List>
