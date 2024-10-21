@@ -25,7 +25,7 @@ const DashBoard = () => {
 
   const postdata = async () => {
     const data = await axios.get(
-      `http://localhost:8000/api/posts/${decodedToken?.data?.id}/feed`
+      `http://54.145.12.92:8000/api/posts/${decodedToken?.data?.id}/feed`
     );
     console.log(data?.data);
     setAllpost(data?.data);
@@ -34,7 +34,7 @@ const DashBoard = () => {
   useEffect(() => {
     const userData = async () => {
       const data = await axios.get(
-        `http://localhost:8000/api/users/all-users/${decodedToken?.data?.id}`
+        `http://54.145.12.92:8000/api/users/all-users/${decodedToken?.data?.id}`
       );
 
       setAlluser(data?.data);
@@ -55,7 +55,7 @@ const DashBoard = () => {
     }
     axios
       .post(
-        `http://localhost:8000/api/posts/${decodedToken?.data?.id}/create`,
+        `http://54.145.12.92:8000/api/posts/${decodedToken?.data?.id}/create`,
         newPost
       )
       .then((response) => {
@@ -73,9 +73,7 @@ const DashBoard = () => {
     <div className="dashboard-main">
       <div className="welcome_note">
         <Card className="friend-list">
-        <Typography style={{marginBottom:'1rem'}}>
-            Add Friends
-        </Typography>
+          <Typography style={{ marginBottom: "1rem" }}>Add Friends</Typography>
           <input
             id="outlined-required"
             placeholder="search for friends"

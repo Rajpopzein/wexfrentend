@@ -28,7 +28,7 @@ const LoginPage = () => {
     onSubmit: async (values) => {
       try {
         const response = await axios.post(
-          "http://localhost:8000/api/users/login",
+          "http://54.145.12.92:8000/api/users/login",
           values
         );
         if (response.status === 200) {
