@@ -113,9 +113,6 @@ const DashBoard = () => {
     },
   });
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [hoverdata, setHoveredData] = useState({});
-  const [btndis, SetBtndis] = useState(false);
-  const [openpop, setOpenPop] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
   // const handleaddfrnd = async () => {
@@ -147,11 +144,6 @@ const DashBoard = () => {
             value={searchTerm}
             onChange={handleSearchChange}
           />
-          {filteredUsers.length === 0 && (
-            <p style={{ fontSize: "0.8rem", marginTop: "5px" }}>
-              No friends found
-            </p>
-          )}
           {filteredUsers.length === 0 && (
             <p style={{ fontSize: "0.8rem", marginTop: "5px" }}>
               No friends found
