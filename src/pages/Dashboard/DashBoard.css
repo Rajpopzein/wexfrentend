@@ -81,3 +81,17 @@
 .activity_card_section::-webkit-scrollbar{
     display: none;
 }
+.select-selectp > div{
+  padding: -0.1rem !important;
+}
+#mui-component-select-visibility{
+ padding: 7.5px!important;
+}
+.all-user-list{
+  overflow-y: scroll;
+  height: 85% !important;
+  overflow-x: hidden;
+}
+.all-user-list::-webkit-scrollbar{
+  display: none;
+}
