@@ -61,7 +61,7 @@ const DashBoard = () => {
   const formik = useFormik({
     initialValues: {
       content: "",
-      visibility: [],
+      visibility: "",
     },
     validationSchema: Yup.object({
       content: Yup.string().required("Please enter a post content"),
@@ -86,8 +86,10 @@ const DashBoard = () => {
   });
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [hoverdata, setHoveredData] = useState({});
+  const [btndis, SetBtndis] = useState(false);
 
   const handleaddfrnd = async () => {
+    SetBtndis(true);
     const value = {
       friendId: hoverdata._id,
     };
@@ -97,6 +99,7 @@ const DashBoard = () => {
     );
     if (data.status === 200) {
       toast("Friend added successfully");
+      SetBtndis(false);
       getalluser();
       getalluser();
       userData();
@@ -147,8 +150,10 @@ const DashBoard = () => {
                         position: "absolute",
                         right: 0,
                         backgroundColor: "#000",
-                        width: "100px",
+                        width: "120px",
+                        height: "30px",
                       }} // Adjust position as needed
+                      disabled={btndis}
                       onClick={handleaddfrnd} // Handle add friend action
                     >
                       Add Friend
@@ -191,7 +196,7 @@ const DashBoard = () => {
               }
             >
               <Select
-                multiple
+
                 className="select-selectp"
                 displayEmpty
                 value={formik.values.visibility}
@@ -202,7 +207,6 @@ const DashBoard = () => {
                   if (selected.length === 0) {
                     return <em>Visibility</em>;
                   }
-                  return selected.join(", ");
                 }}
               >
                 <MenuItem disabled value="">
