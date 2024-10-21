@@ -43,7 +43,7 @@ const LoginPage = () => {
           "https://wexbackend-1.onrender.com/api/users/create_user",
           values
         );
-        if (response.status === 200) {
+        if (response.status === 201) {
           toast.success("Signup Successful");
           navigate("/");
           formik.resetForm(); // Reset the form after successful signup
