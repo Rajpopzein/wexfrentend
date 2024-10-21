@@ -23,7 +23,7 @@
 .postcreation-input {
   width: 100% !important;
   outline: none !important;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem !important;
 }
 .postcreation-input:active{
     outline: none !important;
