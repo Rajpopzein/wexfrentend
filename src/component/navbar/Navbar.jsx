@@ -13,7 +13,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Drawer from "../drawer/Drawer.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { openDrawer, closeDrawer } from "../../redux/slice/drawerslice.jsx";
-import './navbar.css'
+import "./navbar.css";
 
 const drawerWidth = 250;
 
@@ -72,7 +72,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-export default function Navbar({children}) {
+export default function Navbar({ children }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
@@ -92,19 +92,19 @@ export default function Navbar({children}) {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={[
-              isOpen && { visibility: "hidden" },
-            ]}
+            sx={[isOpen && { visibility: "hidden" }]}
           >
             <MenuIcon />
           </IconButton>
-          {!isOpen &&( <Typography variant="h6" noWrap component="div">
-            Persistent drawer
-          </Typography>)}
+          {!isOpen && (
+            <Typography variant="h6" noWrap component="div">
+              DonganZo
+            </Typography>
+          )}
         </Toolbar>
       </AppBar>
       <Drawer />
-      <Main className={isOpen ? "mainnavopen mainnav": "mainnav"} >
+      <Main className={isOpen ? "mainnavopen mainnav" : "mainnav"}>
         <DrawerHeader />
         {children}
       </Main>
