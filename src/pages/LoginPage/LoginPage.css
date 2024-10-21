@@ -68,6 +68,6 @@
     color: var(--primary-dark-blue);
 }
 
-.input_login_form login_btn{
-    cursor: pointer;
+.input_login_form {
+    cursor: pointer !important;
 }
