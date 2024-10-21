@@ -95,3 +95,19 @@
 .all-user-list::-webkit-scrollbar{
   display: none;
 }
+.poper{
+  border: none !important;
+  box-shadow: 0.1px 0.2px 1.3px  var(--primary-dark-blue) !important;
+  padding: 1rem !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  background-color: var(--primary-dark-blue) !important;
+  color: var(--background-light-blue) !important;
+  flex-direction: column !important;
+  font-weight: 800;
+}
+.addfrndbtn{
+  background-color: var(--background-light-blue) !important;
+  margin-top: 5% !important;
+  color: #000 !important;
+}
