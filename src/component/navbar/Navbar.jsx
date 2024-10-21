@@ -13,7 +13,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Drawer from "../drawer/Drawer.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { openDrawer, closeDrawer } from "../../redux/slice/drawerslice.jsx";
+import { Button } from "@mui/material";
 import "./navbar.css";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 250;
 
@@ -77,6 +79,7 @@ export default function Navbar({ children }) {
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.drawer.isOpen);
+  const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
     dispatch(openDrawer());
@@ -86,21 +89,32 @@ export default function Navbar({ children }) {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar position="fixed" className="navbar_main" open={isOpen}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={[isOpen && { visibility: "hidden" }]}
+        <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{display:"flex", alignItems:'center'}}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={[isOpen && { visibility: "hidden" }]}
+            >
+              <MenuIcon />
+            </IconButton>
+            {!isOpen && (
+              <Typography variant="h6" noWrap component="div">
+                DonganZo
+              </Typography>
+            )}
+          </div>
+
+          <Button
+            onClick={() => {
+              localStorage.removeItem("token");
+              navigate("/");
+            }}
           >
-            <MenuIcon />
-          </IconButton>
-          {!isOpen && (
-            <Typography variant="h6" noWrap component="div">
-              DonganZo
-            </Typography>
-          )}
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer />
