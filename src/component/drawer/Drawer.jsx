@@ -1,12 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { IconButton, Typography } from "@mui/material";
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useDispatch, useSelector } from "react-redux";
 import { closeDrawer } from "../../redux/slice/drawerslice.jsx";
 import "./drawer.css";
 import Divider from "@mui/material/Divider";
-
 
 const Drawer = () => {
   const dispatch = useDispatch();
@@ -19,9 +18,16 @@ const Drawer = () => {
   return (
     <div className={isOpen ? "drawer_main" : "hidedrawer_main"}>
       <div className="drawerheader">
-      {isOpen &&( <Typography variant="h6" noWrap component="div" className="header_logo_text">
-            Persistent drawer
-          </Typography>)}
+        {isOpen && (
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            className="header_logo_text"
+          >
+            DonganZo
+          </Typography>
+        )}
         <IconButton
           color="inherit"
           aria-label="close drawer"

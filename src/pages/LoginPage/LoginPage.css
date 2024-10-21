@@ -67,3 +67,7 @@
     text-align: left;
     color: var(--primary-dark-blue);
 }
+
+.input_login_form login_btn{
+    cursor: pointer;
+}
