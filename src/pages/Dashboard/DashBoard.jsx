@@ -80,9 +80,10 @@ const DashBoard = () => {
       value
     );
     if (data.status === 200) {
-      alert("Friend added successfully");
+      toast("Friend added successfully");
       setButtonDisabled(false);
       getalluser();
+      userData();
     }
   };
   // Formik setup
