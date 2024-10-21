@@ -1,0 +1,28 @@
+.main_bubble {
+  display: flex;
+}
+.message_content {
+  background-color: var(--accent-orange);
+  margin-left: 0.2rem;
+  padding: 0.5rem;
+  border-radius: 0px 0.4rem 0.4rem 0.4rem;
+  color: var(--background-light-blue);
+  margin-top: 1rem;
+  max-width: 400px;
+  text-wrap: wrap;
+}
+
+.message_sender {
+  flex-direction: row-reverse !important;
+}
+
+.message_content_sender {
+    background-color: var(--primary-dark-blue);
+    margin-right: 0.2rem;
+    padding: 0.5rem;
+    border-radius: 0.4rem 0rem 0.4rem 0.4rem;
+    color: var(--background-light-blue);
+    margin-top: 1rem;
+    max-width: 400px;
+    text-wrap: wrap;
+  }

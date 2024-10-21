@@ -1,0 +1,29 @@
+.recent_chat_body {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px 0px;
+}
+.chat_content {
+  margin-left: 1rem;
+}
+.chat_message {
+  color: var(--primary-dark-blue);
+  font-size: 0.6rem;
+  font-weight: 400;
+}
+.chat_name {
+  color: var(--primary-gray);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.recent_chat_body:hover{
+    cursor: pointer;
+    /* color: var(--accent-orange);
+    box-shadow: 1px 1px 2px var(--primary-dark-blue); */
+}
+
+.recent_chat_body.active {
+  background-color: var(--primary-dark-blue);
+  color: var(--primary-white);
+}

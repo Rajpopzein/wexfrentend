@@ -1,0 +1,83 @@
+.dashboard-main {
+  padding: 1rem;
+  display: flex;
+  background-color: var(--background-light-blue);
+  height: 89%;
+}
+.activity_card_section {
+  padding: 1rem;
+  width: 60%;
+}
+.welcome_note {
+  width: 20%;
+}
+.profile {
+  width: 20%;
+  margin-top: 1rem;
+}
+.postcreation-card {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  width: 100%;
+}
+.postcreation-input {
+  width: 100% !important;
+  outline: none !important;
+  margin-bottom: 0.5rem;
+}
+.postcreation-input:active{
+    outline: none !important;
+}
+.add-post-btn{
+    background-color: var(--primary-dark-blue);
+    color: var(--white);
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    padding: 0.7rem;
+}
+.friend-list{
+    width: 100%;
+    height: 97%;
+    margin-top: 1rem;
+    padding: 1rem;
+}
+.search-for-frind {
+    padding: 0.6rem !important;
+    width: 100%;
+    outline: none;
+    background-color: var(--background-light-blue);
+    border: none;
+    border-radius: 5px;
+}
+.active_users{
+    margin-bottom: 1rem;
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+}
+.active_users > .user-content{
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+.user-content p:nth-child(even){
+    color: #919191;
+}
+.mainuserlistcard{
+    margin-top: 1rem;
+    padding: 1rem ;
+    height: 77%;
+    overflow-y: scroll;
+}
+.mainuserlistcard::-webkit-scrollbar{
+    display: none;
+}
+.activity_card_section{
+    overflow-y: scroll;
+    height: 100%;
+}
+.activity_card_section::-webkit-scrollbar{
+    display: none;
+}

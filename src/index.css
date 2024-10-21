@@ -1,0 +1,13 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+            --primary-dark-blue: #10375C;
+            --accent-orange: #EB8317;
+            --highlight-yellow: #F3C623;
+            --background-light-blue: #F4F6FF;
+            --white: #FFFFFF;
+            --dark-gray: #333333;
+        }

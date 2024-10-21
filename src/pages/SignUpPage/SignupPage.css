@@ -1,0 +1,8 @@
+.passwordSession{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.passwordSession > .input_login_form:nth-child(odd){
+    margin-right: 20px !important;
+}
