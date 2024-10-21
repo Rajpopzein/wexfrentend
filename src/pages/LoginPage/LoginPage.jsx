@@ -28,7 +28,7 @@ const LoginPage = () => {
     onSubmit: async (values) => {
       try {
         const response = await axios.post(
-          "http://54.145.12.92:8000/api/users/login",
+          "https://wexbackend-1.onrender.com/api/users/login",
           values
         );
         if (response.status === 200) {

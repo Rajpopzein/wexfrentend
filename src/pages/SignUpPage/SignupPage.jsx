@@ -40,7 +40,7 @@ const LoginPage = () => {
     onSubmit: async (values) => {
       try {
         const response = await axios.post(
-          "http://54.145.12.92:8000/api/users/create_user",
+          "https://wexbackend-1.onrender.com/api/users/create_user",
           values
         );
         if (response.status === 200) {

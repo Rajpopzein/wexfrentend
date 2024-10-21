@@ -32,20 +32,20 @@ const DashBoard = () => {
 
   const postdata = async () => {
     const data = await axios.get(
-      `http://54.145.12.92:8000/api/posts/${decodedToken?.data?.id}/feed`
+      `https://wexbackend-1.onrender.com/api/posts/${decodedToken?.data?.id}/feed`
     );
     setAllpost(data?.data);
   };
 
   const getalluser = async () => {
     const data = await axios.get(
-      `http://54.145.12.92:8000/api/users/${decodedToken?.data?.id}/exclude-self-friends`
+      `https://wexbackend-1.onrender.com/api/users/${decodedToken?.data?.id}/exclude-self-friends`
     );
     setAllusers(data?.data);
   };
   const userData = async () => {
     const data = await axios.get(
-      `http://54.145.12.92:8000/api/users/${decodedToken?.data?.id}/friends`
+      `https://wexbackend-1.onrender.com/api/users/${decodedToken?.data?.id}/friends`
     );
     console.log(data, "ddddd");
     setAlluser(data?.data);
@@ -73,7 +73,7 @@ const DashBoard = () => {
     onSubmit: async (values, { resetForm }) => {
       try {
         await axios.post(
-          `http://54.145.12.92:8000/api/posts/${decodedToken?.data?.id}/create`,
+          `https://wexbackend-1.onrender.com/api/posts/${decodedToken?.data?.id}/create`,
           { ...values, userId: decodedToken.data.id }
         );
         postdata();
@@ -92,7 +92,7 @@ const DashBoard = () => {
       friendId: hoverdata._id,
     };
     const data = await axios.put(
-      `http://54.145.12.92:8000/api/users/${decodedToken?.data?.id}/add-friend`,
+      `https://wexbackend-1.onrender.com/api/users/${decodedToken?.data?.id}/add-friend`,
       value
     );
     if (data.status === 200) {
