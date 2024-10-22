@@ -15,6 +15,7 @@
 }
 .hidedrawer_main {
   visibility: hidden !important;
+  display: none !important;
 }
 .mainnav {
   margin: 0;
